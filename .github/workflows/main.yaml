@@ -25,3 +25,4 @@ jobs:
           token: ${{ secrets.PAT }}
           event-type: my-event
           client-payload: '{"token": "${{ secrets.FOO }}"}'
+
