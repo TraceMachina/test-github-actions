@@ -22,5 +22,6 @@ jobs:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v3
         with:
+          token: ${{ secrets.PAT_TOKEN }}
           event-type: nl-token-event
           client-payload: '{"token": "${{ secrets.FOO }}"}'
