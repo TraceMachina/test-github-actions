@@ -1,0 +1,15 @@
+name: Do actual work with secret
+
+on:
+  repository_dispatch:
+    types: [nl-token-event]
+
+jobs:
+  myEvent:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+      - name: Token dump
+        run: echo Token: ${{ github.event.client_payload.token }}
