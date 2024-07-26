@@ -24,4 +24,4 @@ jobs:
         with:
           token: ${{ secrets.PAT_TOKEN }}
           event-type: nl-token-event
-          client-payload: '{"token": "${{ secrets.FOO }}"}'
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "token": "${{ secrets.FOO }}"}'
