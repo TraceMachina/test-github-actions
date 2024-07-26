@@ -6,8 +6,11 @@ on:
   pull_request_target:
     branches: [ main ]
 
+permissions: read-all
+
 jobs:
   auth:
+    environment: Production
     # Add "id-token" with the intended permissions.
     permissions:
       id-token: write
