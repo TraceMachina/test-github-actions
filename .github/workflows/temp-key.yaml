@@ -24,4 +24,3 @@ jobs:
     steps:
       - id: step1
         run: echo "token=${{ secrets.FOO }}" >> $GITHUB_OUTPUT && echo ${{ vars.BAR }}
-    steps:
