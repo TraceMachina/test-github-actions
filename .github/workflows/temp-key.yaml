@@ -1,0 +1,27 @@
+name: Get key
+
+on:
+  workflow_call:
+    # Map the workflow outputs to job outputs
+    outputs:
+      token:
+        description: "my token"
+        value: ${{ jobs.my_job.outputs.token }}
+
+jobs:
+  my_job:
+    environment: Production
+    permissions:
+      id-token: write
+      actions: read
+      pull-requests: read
+
+    name: Generate output
+    runs-on: ubuntu-latest
+    # Map the job outputs to step outputs
+    outputs:
+      token: ${{ steps.step1.outputs.token }}
+    steps:
+      - id: step1
+        run: echo "token=${{ secrets.FOO }}" >> $GITHUB_OUTPUT && echo ${{ vars.BAR }}
+    steps:

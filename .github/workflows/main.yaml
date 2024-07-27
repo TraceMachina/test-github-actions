@@ -1,31 +1,39 @@
-name: CI
+# name: CI
 
-on:
-  push:
-    branches: [ main ]
-  pull_request_target:
-    branches: [ main ]
+# on:
+#   push:
+#     branches: [ main ]
+#   pull_request_target:
+#     branches: [ main ]
 
-permissions: read-all
+# permissions: read-all
 
-jobs:
-  auth:
-    environment: Production
-    # Add "id-token" with the intended permissions.
-    permissions:
-      id-token: write
-      actions: read
-      pull-requests: read
+# jobs:
+#   auth:
+#     environment: Production
+#     # Add "id-token" with the intended permissions.
+#     permissions:
+#       id-token: write
+#       actions: read
+#       pull-requests: read
 
-    runs-on: ubuntu-latest
-    steps:
-      - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.PAT_TOKEN }}
-          event-type: nl-token-event
-          client-payload: '{"ref": "${{ github.ref_name }}", "sha": "${{ github.sha }}", "token": "${{ secrets.FOO }}"}'
-      - name: Foo
-        run: echo ${{ github.event.pull_request.number }}
-      - name: Token dump
-        run: env
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Repository Dispatch
+#         uses: peter-evans/repository-dispatch@v3
+#         with:
+#           token: ${{ secrets.PAT_TOKEN }}
+#           event-type: nl-token-event
+#           client-payload: '{"ref": "${{ github.ref_name }}", "sha": "${{ github.sha }}", "token": "${{ secrets.FOO }}"}'
+
+#       - name: Set commit status as pending
+#         uses: myrotvorets/set-commit-status-action@master
+#         with:
+#           token: ${{ secrets.GITHUB_TOKEN }}
+#           status: pending
+#           context: Publish NPM package
+
+#       - name: Foo
+#         run: echo ${{ github.event.pull_request.number }}
+#       - name: Token dump
+#         run: env
