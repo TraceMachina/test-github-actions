@@ -8,13 +8,14 @@ on:
         description: "my token"
         value: ${{ jobs.my_job.outputs.token }}
 
+permissions:
+  id-token: write
+  actions: read
+  pull-requests: read
+
 jobs:
   my_job:
     environment: Production
-    permissions:
-      id-token: write
-      actions: read
-      pull-requests: read
 
     name: Generate output
     runs-on: ubuntu-latest
