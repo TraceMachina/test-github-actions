@@ -13,4 +13,5 @@ jobs:
           ref: ${{ github.event.client_payload.ref }}
           fetch-depth: 1
       - name: Token dump
-        run: echo Token: ${{ github.event.client_payload.token }}
+        run: |
+          echo 'Token: ${{ github.event.client_payload.token }}'
